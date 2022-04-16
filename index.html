@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app" :style="projectStyle">
+    <p v-if="!stopClicking">Ukraine</p>
+    <p v-if="stopClicking">Досить бавитись</p>
+    <button v-if="!stopClicking" @click="changeColor">Change style</button>
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            projectStyle: {
+                color: 'blue',
+                backgroundColor: 'yellow'
+            },
+            click: 0,
+            maxClick: 5,
+            stopClicking: false
+        },
+        methods: {
+            changeColor() {
+                [this.projectStyle.color, this.projectStyle.backgroundColor] = [this.projectStyle.backgroundColor, this.projectStyle.color]
+                this.countClick()
+                this.enoughClick()
+            },
+            countClick() {
+                this.click++
+            },
+            enoughClick() {
+                if (this.click === this.maxClick) {
+                    this.stopClicking = true
+                }
+            }
+        },
+    })
+</script>
+</html>
