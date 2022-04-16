@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <form @submit.prevent="add">
+        <input v-model="input" />
+        <button>Add</button>
+    </form>
+    <p v-for="todo in todoList" @click="remove(todo.id)">{{todo.message}}</p>
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script type = "text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            todoList: [],
+            input: '',
+            id: 0,
+        },
+        methods: {
+            add() {
+                this.todoList.push({id: this.id++,message: this.input});
+            },
+            remove(id){
+                this.todoList = this.todoList.filter((item) => item.id !== id)
+            }
+        },
+    })
+</script>
+</html>
